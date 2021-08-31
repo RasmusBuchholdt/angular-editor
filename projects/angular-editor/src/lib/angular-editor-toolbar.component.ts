@@ -1,10 +1,20 @@
-import {Component, ElementRef, EventEmitter, Inject, Input, Output, Renderer2, ViewChild} from '@angular/core';
-import {AngularEditorService, UploadResponse} from './angular-editor.service';
-import {HttpResponse, HttpEvent} from '@angular/common/http';
-import {DOCUMENT} from '@angular/common';
-import {CustomClass} from './config';
-import {SelectOption} from './ae-select/ae-select.component';
+import { DOCUMENT } from '@angular/common';
+import { HttpEvent, HttpResponse } from '@angular/common/http';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { SelectOption } from './ae-select/ae-select.component';
+import { AngularEditorService, UploadResponse } from './angular-editor.service';
+import { CustomClass } from './config';
 
 @Component({
   selector: 'angular-editor-toolbar',
@@ -321,7 +331,9 @@ export class AngularEditorToolbarComponent {
           this.upload(file).subscribe(() => this.watchUploadImage);
         } else if (this.uploadUrl) {
             this.editorService.uploadImage(file).subscribe((response) => {
+              // @ts-ignore
               if (response.body) {
+                // @ts-ignore
                 this.watchUploadImage(response, event)
               }
             });
