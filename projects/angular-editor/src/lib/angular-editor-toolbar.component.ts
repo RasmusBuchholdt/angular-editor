@@ -320,7 +320,11 @@ export class AngularEditorToolbarComponent {
         if (this.upload) {
           this.upload(file).subscribe(() => this.watchUploadImage);
         } else if (this.uploadUrl) {
-            this.editorService.uploadImage(file).subscribe(() => this.watchUploadImage);
+            this.editorService.uploadImage(file).subscribe((response) => {
+              if (response.body) {
+                this.watchUploadImage(response, event)
+              }
+            });
         } else {
           const reader = new FileReader();
           reader.onload = (e: ProgressEvent) => {
